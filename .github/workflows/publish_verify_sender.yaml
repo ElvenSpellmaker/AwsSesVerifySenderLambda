@@ -22,6 +22,7 @@ jobs:
 
       - name: Release
         run: |
+          make zip
           $zipName = make zip-name
 
           gh release upload ${{ github.event.release.name }} --clobber ${zipName}
