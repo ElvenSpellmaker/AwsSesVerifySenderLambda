@@ -1,0 +1,3 @@
+[run]
+omit = __init__.py, test_*.py, lambda_invoker.py
+relative_files = true
