@@ -9,6 +9,10 @@ defaults:
   run:
     shell: pwsh
 
+permissions:
+  # Ridiculously wide, but there's no tighter permissions atm...
+  contents: write
+
 jobs:
   AWS_SES_RELEASE_FUNCTION:
     name: AWS SES Release Function
