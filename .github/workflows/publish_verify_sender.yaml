@@ -1,0 +1,27 @@
+name: 'Release: AWS SES Verify Sender Lambda'
+
+on:
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  AWS_SES_RELEASE_FUNCTION:
+    name: AWS SES Release Function
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Release
+        run: |
+          $zipName = make zip-name
+
+          gh release upload ${{ github.event.release.name }} --clobber ${zipName}
+        env:
+          GH_TOKEN: ${{ github.token }}

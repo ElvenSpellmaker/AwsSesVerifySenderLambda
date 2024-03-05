@@ -1,0 +1,37 @@
+name: 'AWS SES Verify Sender Lambda'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  AWS_SES_LINT_AND_TEST:
+    name: AWS SES Lint and Test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install Pipenv and dependencies
+        run: |
+          make install_dev
+
+      - name: Run Linting
+        run: |
+          make lint
+          $functionName = make func-name
+          # If the Linting Report exits then there's linting errors, exit with 1, else 0
+          exit [int][bool]::Parse($(Test-Path -Path "build/${functionName}_lint_report.txt" -Type Leaf))
+
+      - name: Run Tests
+        run: |
+          make test
