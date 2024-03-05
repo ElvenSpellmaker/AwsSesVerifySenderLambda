@@ -35,7 +35,7 @@ lambda_invoker: find_python_user_dir
 	$(PYTHON_LOCAL_BIN)/pipenv run python3 lambda_invoker.py $(TARGET)
 
 zip:
-	zip -r ../$(FUNC_NAME).zip $(FUNC_NAME).py
+	zip -r $(FUNC_NAME).zip $(FUNC_NAME).py
 
 sonar-zip:
 	zip -r sonar-deps.zip build/
