@@ -1,6 +1,6 @@
 FUNC_NAME=verify_sender
 
-.PHONY: find_python_user_dir install install_dev source clean lint test zip sonar-zip func-name zip-name build ci_build deploy
+.PHONY: find_python_user_dir install install_dev source clean lint test lambda_invoker zip sonar-zip func-name zip-name build deploy
 
 find_python_user_dir:
 	$(eval PYTHON_LOCAL_BIN = $(shell python3 -m site --user-base)/bin)
@@ -45,8 +45,6 @@ func-name:
 
 zip-name:
 	@echo $(FUNC_NAME).zip
-
-ci_build: clean install_dev lint test
 
 build: clean install_dev lint test
 
